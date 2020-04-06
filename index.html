@@ -3,11 +3,16 @@
 <head>
 	<title>SArpnt Computer System</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<img id="img" style="display:none" src="https://cdn1.thr.com/sites/default/files/2011/06/nicolas_cage_2011_a_p.jpg">
 </head>
 
 <body>
-	<canvas id="display" width="480" height="360" style="image-rendering:pixelated;width:960;height:720"></canvas>
-	<canvas id="fullarea" width="512" height="512"></canvas>
+	<br>
+	<div>t for time (ms), y for y position on canvas</div>
+	x scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 512 /** (y%2?1:-1)*/"><br>
+	y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 32)"><br>
+	t: <span id="t"></span> scale: <button>&lt</button></span><span id="scale">1</span><button>&gt</button><br>
+	<canvas id="display" width="480" height="360" style="image-rendering:pixelated"></canvas>
 </body>
 <script src="script.js"></script>
 
