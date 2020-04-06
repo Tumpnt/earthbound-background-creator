@@ -9,9 +9,12 @@
 <body>
 	<br>
 	<div>t for time (ms), y for y position on canvas</div>
-	x scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 512 /** (y%2?1:-1)*/"><br>
-	y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 32)"><br>
-	t: <span id="t"></span> scale: <button>&lt</button></span><span id="scale">1</span><button>&gt</button><br>
+	x scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 50"><br>
+	y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 40 + t / 400) * 100"><br>
+	zoom: <button onclick="pxSize(-1)">-</button>
+	</span><span id="pxsd">1</span>x
+	<button onclick="pxSize(1)">+</button>
+	t: <span id="t"></span><br>
 	<canvas id="display" width="480" height="360" style="image-rendering:pixelated"></canvas>
 </body>
 <script src="script.js"></script>

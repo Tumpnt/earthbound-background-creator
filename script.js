@@ -4,29 +4,32 @@ var tspan = $('#t')[0]
 var img = $('#img')[0]
 var xin = $('#xin')[0]
 var yin = $('#yin')[0]
-var xf
-var yf
+var xf, yf, xfl, yfl
 var pxs = 1
+var pxsd = $('#pxsd')[0]
+
+var mod = (x, y) => (x % y + y) % y
 
 function pxSize(inc) {
-	pxs += inc ? 1 : -1
-	canvas.style.width = 480 * pxs
-	canvas.style.height = 360 * pxs
+	let n = pxs + inc
+	if (n > 0) {
+		pxs = n
+		ctx.canvas.style.width = 480 * pxs
+		ctx.canvas.style.height = 360 * pxs
+		pxsd.innerHTML = pxs
+	}
 }
-var mod = (x, y) => (x % y + y) % y
 
 function draw() {
 	let t = performance.now()
 
 	ctx.clearRect(0, 0, 480, 360)
-	ctx.fillRect(0, 0, 480, 360)
 
 	for (let y = 0; y < img.height; y++) {
 		let xo, yo
-		try {
-			xo = Math.round(xf(t, y))
-			yo = Math.round(yf(t, y))
-		} catch (e) { xf = yf = () => 0 }
+		try { xo = Math.round(xf(t, y)) } catch (e) { xf = xfl; break }
+		try { yo = Math.round(yf(t, y)) } catch (e) { yf = yfl; break }
+
 		for (let w = 0; w < 480; w += img.width)
 			ctx.drawImage(
 				img,
@@ -45,8 +48,8 @@ function draw() {
 }
 
 window.onload = () => {
-	xin.oninput = () => { try { xf = eval(`(t,y)=>(${xin.value || 0})`) } catch (e) { } }
-	yin.oninput = () => { try { yf = eval(`(t,y)=>(${yin.value || 0})`) } catch (e) { } }
+	xin.oninput = () => { try { xfl = xf; xf = eval(`(t,y)=>(${xin.value || 0})`) } catch (e) { } }
+	yin.oninput = () => { try { yfl = yf; yf = eval(`(t,y)=>(${yin.value || 0})`) } catch (e) { } }
 	xin.oninput()
 	yin.oninput()
 	requestAnimationFrame(draw)
