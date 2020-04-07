@@ -8,7 +8,7 @@ var xf, yf, xfl, yfl
 var pxs = 1
 var pxsd = $('#pxsd')[0]
 
-var mod = (x, y) => (x % y + y) % y
+var mod = (x, y, s = 1) => (x % y + y * s) % y
 
 function pxSize(inc) {
 	let n = pxs + inc
@@ -25,19 +25,19 @@ function draw() {
 
 	ctx.clearRect(0, 0, 480, 360)
 
-	for (let y = 0; y < img.height; y++) {
+	for (let y = 0; y < 360; y++) {
 		let xo, yo
 		try { xo = Math.round(xf(t, y)) } catch (e) { xf = xfl; break }
 		try { yo = Math.round(yf(t, y)) } catch (e) { yf = yfl; break }
 
-		for (let w = 0; w < 480; w += img.width)
+		for (let w = -img.width; w < 480; w += img.width)
 			ctx.drawImage(
 				img,
 				0,
 				mod(yo + y, img.height),
 				img.width,
 				1,
-				mod(xo, img.width) - w,
+				mod(xo, img.width) + w,
 				y,
 				img.width,
 				1
