@@ -7,12 +7,15 @@
 
 <body>
 	Image: <input id="img" type="file" name="filename" accept="image/*"><br>
-	<div>t for time (ms), and y for y position on canvas.</div>
-	X scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 50"><br>
-	Y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 40 + t / 400) * 100"><br>
+	<div>t for time (ms), and y for y position on canvas.</div><br>
+	<span id="xe"></span><br>
+	X scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 50"><br><br>
+	<span id="ye"></span><br>
+	Y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 40 + t / 400) * 100"><br><br>
 	Zoom: <button onclick="pxSize(-1)">-</button>
 	</span><span id="pxsd">1</span>x
 	<button onclick="pxSize(1)">+</button>
+	clear before draw (for transparent images): <input type="checkbox" id="clear">
 	t: <span id="t"></span><br>
 	<canvas id="display" width="480" height="360" style="image-rendering:pixelated"></canvas>
 </body>
