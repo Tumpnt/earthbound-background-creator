@@ -1,17 +1,16 @@
 <html>
 
 <head>
-	<title>SArpnt Computer System</title>
+	<title>Earthbound Background System</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<img id="img" style="display:none" src="https://tumpnt.github.io/tile-platformer/assets/sprite/player.png">
 </head>
 
 <body>
-	<br>
-	<div>t for time (ms), y for y position on canvas</div>
-	x scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 50"><br>
-	y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 40 + t / 400) * 100"><br>
-	zoom: <button onclick="pxSize(-1)">-</button>
+	Image: <input id="img" type="file" name="filename" accept="image/*"><br>
+	<div>t for time (ms), and y for y position on canvas.</div>
+	X scroll: <input type="text" id="xin" style="width:80%" value="Math.sin(t / 256 + y / 64) * 50"><br>
+	Y scroll: <input type="text" id="yin" style="width:80%" value="Math.sin(y / 40 + t / 400) * 100"><br>
+	Zoom: <button onclick="pxSize(-1)">-</button>
 	</span><span id="pxsd">1</span>x
 	<button onclick="pxSize(1)">+</button>
 	t: <span id="t"></span><br>

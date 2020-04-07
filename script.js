@@ -1,9 +1,9 @@
 "use strict"
-const ctx = $('#display')[0].getContext('2d')
+var ctx = $('#display')[0].getContext('2d')
 var tspan = $('#t')[0]
-var img = $('#img')[0]
 var xin = $('#xin')[0]
 var yin = $('#yin')[0]
+var img = new Image()
 var xf, yf, xfl, yfl
 var pxs = 1
 var pxsd = $('#pxsd')[0]
@@ -47,10 +47,25 @@ function draw() {
 	requestAnimationFrame(draw)
 }
 
+function readImage() {
+	if (this.files && this.files[0]) {
+		var FR = new FileReader()
+		FR.onload = function (e) {
+			function imgLoad() {
+				img.removeEventListener("load", imgLoad)
+				requestAnimationFrame(draw)
+			}
+			img.addEventListener("load", imgLoad)
+			img.src = e.target.result
+		}
+		FR.readAsDataURL(this.files[0])
+	}
+}
+
 window.onload = () => {
 	xin.oninput = () => { try { xfl = xf; xf = eval(`(t,y)=>(${xin.value || 0})`) } catch (e) { } }
 	yin.oninput = () => { try { yfl = yf; yf = eval(`(t,y)=>(${yin.value || 0})`) } catch (e) { } }
 	xin.oninput()
 	yin.oninput()
-	requestAnimationFrame(draw)
+	$('#img')[0].addEventListener("change", readImage, false)
 }
